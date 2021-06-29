@@ -3,6 +3,17 @@ import prettytable
 
 NUMBERS = []
 
+def sort():
+    for i in range(0, len(NUMBERS)):
+        minIndex = i
+
+        for j in range(i+1, len(NUMBERS)):
+            if(NUMBERS[minIndex]>NUMBERS[j]):
+                minIndex = j
+
+        temp = NUMBERS[i]
+        NUMBERS[i] = NUMBERS[minIndex]
+        NUMBERS[minIndex] = temp
 def average():
     total = 0
     for number in NUMBERS:
@@ -32,18 +43,18 @@ ex = False
 reg_dec = re.compile(r"^\d+(?:\.\d*)?$")
 
 print("Welcome to the Numbers Program!")
-print("Input numbers to perform the program or type 'exit' to close the program.")
 
 while(ex == False):
     if(len(NUMBERS)):
         print("Curent Numbers : ")
-        NUMBERS.sort()
+        sort()
         print_table()
-        print("Average    = " + str(average()))
-        print("Median     = " + str(median()))
-        print("MLP Result = " + str(multiply()))
+        print("Average    = " + str(round(average(),2)))
+        print("Median     = " + str(round(median(),2)))
+        print("MLP Result = " + str(round(multiply(),2)))
         
 
+    print("Input numbers to perform the program or type 'exit' to close the program.")
     data = input("> ")
     if(reg_dec.match(data)):
         if(data.isnumeric()):
@@ -55,3 +66,4 @@ while(ex == False):
             ex = True
         else:
             print("! Unrecognize input")
+    
